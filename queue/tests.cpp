@@ -1,5 +1,5 @@
 #include "queue.h"
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 #include <queue>
 
 TEST(Queue, Constructors) {

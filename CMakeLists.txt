@@ -21,16 +21,17 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(spdlog)
 
 enable_testing()
-
 include(cmake/ClangTidyCheck.cmake)
 
 include_directories(queue)
 include_directories(read)
 
-
+add_subdirectory(queue)
+add_subdirectory(read)
 add_subdirectory(AssemblyTranslate)
 add_subdirectory(Laba2)
 add_subdirectory(Laba3)
+add_subdirectory(Laba4)
 add_subdirectory(free_room)
 
 

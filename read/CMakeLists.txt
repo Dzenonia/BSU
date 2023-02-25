@@ -5,8 +5,8 @@ project(read)
 enable_testing()
 
 file(GLOB SRC_FILES *.cpp)
+#add_executable(read ${SRC_FILES})
+add_library(read ${SRC_FILES})
+target_link_libraries(read gtest_main gmock)
 
-add_executable(test_read ${SRC_FILES})
-target_link_libraries(test_read gtest_main gmock)
-
-add_test(NAME test_read COMMAND test_read)
+add_test(NAME read COMMAND read)

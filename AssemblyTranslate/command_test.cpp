@@ -103,6 +103,10 @@ TEST(Command, mul) {
     EXPECT_EQ(lhs, 2131 * 1123);
 }
 
+//TEST (Command, Umul) {
+//    EXPECT_EQ(Command<32>::umul(-1, -1), 1);
+//}
+
 TEST(Command, MulThrow) {
     int lhs = 112306;
     int rhs = 213106;

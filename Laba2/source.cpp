@@ -5,7 +5,7 @@
 
 auto console = spdlog::stderr_color_mt("console");
 
-auto funcTo48Bits = [&](const std::tuple<uint16_t, uint16_t, int16_t> &value) -> int64_t {
+auto funcTo48Bits = [](const std::tuple<uint16_t, uint16_t, int16_t> &value) -> int64_t {
     std::bitset<48> answer;
     for (int i = 0; i < 16; ++i) {
         answer[47 - i] = (std::get<2>(value) >> (15 - i)) & 1;

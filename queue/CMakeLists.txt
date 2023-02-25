@@ -6,7 +6,7 @@ enable_testing()
 
 file(GLOB SRC_FILES *.cpp)
 
-add_executable(test_queue ${SRC_FILES})
-target_link_libraries(test_queue gtest_main gmock)
-
-add_test(NAME test_queue COMMAND test_queue)
+#add_executable(queue ${SRC_FILES})
+add_library(queue ${SRC_FILES})
+target_link_libraries(queue gtest_main gmock)
+add_test(NAME queue COMMAND queue)
