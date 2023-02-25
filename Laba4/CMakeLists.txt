@@ -5,7 +5,7 @@ project(Laba4)
 
 file(GLOB SRC_FILES *.cpp)
 add_executable(Laba4 ${SRC_FILES})
-target_link_libraries(Laba4 gtest_main gmock spdlog)
+target_link_libraries(Laba4 gtest_main gmock)
 
 add_test(NAME Laba4 COMMAND Laba4)
 
