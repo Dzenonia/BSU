@@ -61,7 +61,7 @@ TEST(Laba4, Task3Crossing) {
     EXPECT_TRUE(getTask3Crossing(arr1, arr2, res, 3, 3, 2));
 }
 
-TEST(Laba4, Task3CSub) {
+TEST(Laba4, Task3Sub) {
     int arr1[] = {1, 2, 3};
     int arr2[] = {4, 2, 1};
     int res1[] = {3};

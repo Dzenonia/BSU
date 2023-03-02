@@ -32,6 +32,8 @@ add_subdirectory(AssemblyTranslate)
 add_subdirectory(Laba2)
 add_subdirectory(Laba3)
 add_subdirectory(Laba4)
+add_subdirectory(Laba5)
+add_subdirectory(kr1)
 add_subdirectory(free_room)
 
 
