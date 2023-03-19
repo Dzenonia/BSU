@@ -35,12 +35,6 @@ double getTask1(double x, double y) {
     return result;
 }
 
-//void getTask2(double a, double b, double c) {
-//    __asm {
-//
-//    }
-//}
-
 double getTask2(double a, double b, double c) {
       double eps = 1e-6;
       double left = -10;
@@ -51,27 +45,158 @@ double getTask2(double a, double b, double c) {
           finit
 
       main_begin:
+          // ax^2 + b / (x + 11) + c
           fld left
           fmul left
           fmul a
-
           fld b
           fld left
           fadd eleven
           fdivp st(1), st(0)
-
           faddp st(1), st(0)
-
           fadd c
 
           fld left
           fadd
-          //fpopfstp result //
-
 
       }
       console->info("Values is {}", result);
 }
+
+double piNumber(int cntIteration) {
+    double result = 0;
+    double zero = 0;
+    double twelve = 12;
+    double delEps;
+    __asm {
+        finit
+        mov ecx, cntIteration
+        fldz // result
+        fld1 // k
+        fld1 // sgn
+        cmp ecx, 0
+        je end_loop
+        begin_loop:
+            fld st(0)
+            fld st(2)
+            fmul st(0), st(0)
+            fdivp st(1), st(0)
+            faddp st(3), st(0)
+            fld1
+            faddp st(2), st(0)
+            fchs
+            loop begin_loop
+        end_loop:
+        fstp result
+        fstp result
+        mov eax, 12
+        fld twelve
+        fmulp st(1), st(0)
+        fsqrt
+        fldpi
+        fsub st(0), st(1)
+        fstp delEps
+        fstp result
+    }
+    std::cout << delEps << '\n';
+    return result;
+}
+
+double lnNumber(int cntIteration) {
+    double result = 0;
+    double two = 2;
+    double four = 4;
+    double delEps;
+    __asm {
+            finit
+            mov ecx, cntIteration
+            fldz // result
+            fld1 // k
+            cmp ecx, 0
+            je end_loop
+            begin_loop:
+                fld1
+                fld st(1)
+                fmul st(0), st(0)
+                fmul st(0), st(2)
+                fmul four
+                fsub st(0), st(2)
+                // 4k^3 - k
+                fdivp st(1), st(0)
+                faddp st(2), st(0)
+                // complete
+                fld1
+                faddp st(1), st(0)
+                loop begin_loop
+            end_loop:
+            fstp result
+            fld1
+            faddp st(1), st(0)
+            fdiv two
+            fldln2
+            fsub st(0), st(1)
+            fstp delEps
+            fst result
+    }
+    std::cout << delEps << '\n';
+    return result;
+}
+
+double getTask5(double eps = 1e-6) {
+    double result;
+    double delEps;
+    __asm {
+        finit
+
+        fldz
+        fldz
+
+        loop_begin:
+            fld st(0)
+            fmul st(0), st(0)
+            fld st(1)
+            fsin
+            faddp st(1), st(0)
+            faddp st(2), st(0)
+            fadd eps
+
+            fldpi
+            fadd st(0), st(0)
+            fcomi st(0), st(1)
+
+            fstp result
+            jbe end_loop
+
+            jmp loop_begin
+        end_loop:
+
+        fstp result
+        fmul eps
+        fstp result
+    }
+    return result;
+}
+
+double getTsk6(double x) {
+    double result;
+
+    __asm {
+            fldln2
+            fld x
+            fyl2x
+            fld1
+            faddp st(1), st(0)
+            fxch
+            f2xm1
+            fld1
+            faddp st(1), st(0)
+            fscale
+            fstp result
+    }
+    return result;
+}
+
+
 
 TEST(Laba5, Task1) {
     auto func = [](double x, double y) -> double {
@@ -83,81 +208,16 @@ TEST(Laba5, Task1) {
     EXPECT_DOUBLE_EQ(getTask1(0.1221, 0.9812), func(0.1221, 0.9812));
 }
 
-TEST(Laba5, Task2) {
-    getTask2(1, 1, 1);
+TEST(Laba5, Task3) {
+    std::cout << std::fixed << std::setprecision(30) << piNumber(100000000) << '\n';
+}
+
+TEST(Laba5, Task4) {
+    std::cout << std::fixed << std::setprecision(30) << lnNumber(100000000) << '\n';
+}
+
+TEST(Laba5, Task5) {
+    std::cout << std::fixed << std::setprecision(30) << getTask5() << '\n';
 }
 
 
-
-//TEST(Laba4, Task1) {
-//    int array1[] = {1, 1, 1, 1, 5};
-//    int sz1 = getTask1(array1, 5);
-//    EXPECT_EQ(sz1, 2);
-//    EXPECT_EQ(array1[0], 1);
-//    EXPECT_EQ(array1[1], 5);
-//
-//    int array2[] = {1, 2, 1, 1, 5};
-//    int sz2 = getTask1(array2, 5);
-//    EXPECT_EQ(sz2, 3);
-//    EXPECT_EQ(array2[0], 1);
-//    EXPECT_EQ(array2[1], 2);
-//    EXPECT_EQ(array2[2], 5);
-//
-//
-//    int array3[] = {1, 1, 1, 1, 1};
-//    int sz3 = getTask1(array3, 5);
-//    EXPECT_EQ(sz3, 1);
-//    EXPECT_EQ(array1[0], 1);
-//}
-//
-//TEST(Laba4, Task2) {
-//    int arr1[] = {1, 1, 1};
-//    int arr2[] = {0, 0, 0};
-//    int result[] = {0, 0, 0, 0, 0, 0};
-//    getTask2(arr1, arr2, result, 3);
-//    EXPECT_TRUE(std::is_sorted(result, result + 6));
-//
-//
-//    int arr3[] = {2, 5, 7};
-//    int arr4[] = {1, 6, 7};
-//    getTask2(arr3, arr4, result, 3);
-//    EXPECT_TRUE(std::is_sorted(result, result + 6));
-//
-//    int arr5[] = {1, 2, 4};
-//    int arr6[] = {12, 12, 13};
-//    getTask2(arr5, arr6, result, 3);
-//    EXPECT_TRUE(std::is_sorted(result, result + 6));
-//
-//
-//}
-//
-//TEST(Laba4, Task3Crossing) {
-//    int arr1[] = {1, 2, 3};
-//    int arr2[] = {4, 2, 1};
-//    int res[] = {1, 2};
-//    EXPECT_TRUE(getTask3Crossing(arr1, arr2, res, 3, 3, 2));
-//    res[1] = 3;
-//    EXPECT_FALSE(getTask3Crossing(arr1, arr2, res, 3, 3, 2));
-//    arr1[0] = 0;
-//    arr2[1] = 5;
-//    EXPECT_FALSE(getTask3Crossing(arr1, arr2, res, 3, 3, 2));
-//    arr2[0] = 3;
-//    EXPECT_TRUE(getTask3Crossing(arr1, arr2, res, 3, 3, 2));
-//}
-//
-//TEST(Laba4, Task3Sub) {
-//    int arr1[] = {1, 2, 3};
-//    int arr2[] = {4, 2, 1};
-//    int res1[] = {3};
-//    EXPECT_TRUE(getTask3Sub(arr1, arr2, res1, 3, 3, 1));
-//
-//    int arr3[] = {1, 2, 3};
-//    int arr4[] = {0, 0, 0};
-//    int res2[] = {1, 2, 3};
-//    EXPECT_TRUE(getTask3Sub(arr3, arr4, res2, 3, 3, 3));
-//
-//    int arr5[] = {1, 2, 3};
-//    int arr6[] = {1, 2, 3};
-//    int res3[] = {2};
-//    EXPECT_FALSE(getTask3Sub(arr5, arr6, res3, 3, 3, 1));
-//}

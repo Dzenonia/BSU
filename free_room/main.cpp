@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+<<<<<<< Updated upstream
 
 typedef long long ll;
 
@@ -122,3 +123,36 @@ int main() {
               << '\n';
     return 0;
 }
+=======
+
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+
+ld n, m, k, eps = 1e-15;
+const int iterations = 200;
+
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    std::cin >> n >> m >> k;
+
+    ld l = 0, r = 1000;
+
+    for (int i = 0; i < iterations; ++i) {
+        ld mid = (l + r) / 2;
+//        cout << l << " " << r << '\n';
+        if ((floor(n / mid) * floor(m / mid)) >= k - eps) {
+            l = mid;
+        } else {
+            r = mid;
+        }
+    }
+
+    std::cout << fixed << setprecision(12) << l << '\n';
+
+    return 0;
+}
+>>>>>>> Stashed changes
