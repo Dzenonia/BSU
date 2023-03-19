@@ -1,9 +1,6 @@
-cmake_minimum_required(VERSION 3.22)
-set(CMAKE_CXX_STANDARD 20)
+cmake_minimum_required(VERSION 3.17)
 project(myRoom)
 
-file(GLOB SRC_FILES *.cpp)
-add_executable(myRoom ${SRC_FILES})
-target_link_libraries(myRoom gtest_main gmock spdlog queue read)
+set(CMAKE_CXX_STANDARD 11)
 
-#add_test(NAME myRoom COMMAND myRoom)
+add_executable(myRoom main.cpp)

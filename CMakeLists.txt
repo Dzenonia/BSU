@@ -33,8 +33,10 @@ add_subdirectory(Laba2)
 add_subdirectory(Laba3)
 add_subdirectory(Laba4)
 add_subdirectory(Laba5)
+add_subdirectory(Laba7)
 add_subdirectory(kr1)
 add_subdirectory(free_room)
+add_subdirectory(string)
 
 
 add_test(NAME BSU COMMAND BSU)
