@@ -71,35 +71,35 @@ TEST(Command, add) {
     EXPECT_EQ(lhs, -12321 - 432432);
 }
 
-TEST(Command, mul) {
+TEST(Command, imul) {
     int lhs = 0;
     int rhs = 0;
-    Command<32>::mul(lhs, rhs);
+    Command<32>::imul(lhs, rhs);
     EXPECT_EQ(lhs, 0);
 
     lhs = 1;
     rhs = 0;
-    Command<32>::mul(lhs, rhs);
+    Command<32>::imul(lhs, rhs);
     EXPECT_EQ(lhs, 0);
 
     lhs = 1;
     rhs = 1;
-    Command<32>::mul(lhs, rhs);
+    Command<32>::imul(lhs, rhs);
     EXPECT_EQ(lhs, 1);
 
     lhs = 1;
     rhs = 2;
-    Command<32>::mul(lhs, rhs);
+    Command<32>::imul(lhs, rhs);
     EXPECT_EQ(lhs, 2);
 
     lhs = 5;
     rhs = 7;
-    Command<32>::mul(lhs, rhs);
+    Command<32>::imul(lhs, rhs);
     EXPECT_EQ(lhs, 35);
 
     lhs = 1123;
     rhs = 2131;
-    Command<32>::mul(lhs, rhs);
+    Command<32>::imul(lhs, rhs);
     EXPECT_EQ(lhs, 2131 * 1123);
 }
 
@@ -110,5 +110,5 @@ TEST(Command, mul) {
 TEST(Command, MulThrow) {
     int lhs = 112306;
     int rhs = 213106;
-    EXPECT_ANY_THROW(Command<32>::mul(lhs, rhs));
+    EXPECT_ANY_THROW(Command<32>::imul(lhs, rhs));
 }

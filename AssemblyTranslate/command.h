@@ -15,9 +15,9 @@ public:
 
     static void sub(int &lhs, int rhs, BasicLogPtr logger = standartLog);
 
-    static void umul(int &lhs, int rhs, BasicLogPtr logger = standartLog);
-
     static void mul(int &lhs, int rhs, BasicLogPtr logger = standartLog);
+
+    static void imul(int &lhs, int rhs, BasicLogPtr logger = standartLog);
 
 //
 //    static void imul(int &lhs, int rhs);
@@ -59,21 +59,21 @@ void Command<BITS>::sub(int &lhs, int rhs, BasicLogPtr logger) {
 }
 
 template<int BITS>
-void Command<BITS>::mul(int &lhs, int rhs, BasicLogPtr logger) {
+void Command<BITS>::imul(int &lhs, int rhs, BasicLogPtr logger) {
     logger->info("Start do operation {}", "mul");
     int sgn = ((lhs < 0) ^ (rhs < 0) ? -1 : 1);
     if (lhs < 0) {
         lhs = -lhs;
     }
     logger->trace("Using imul is norm?");
-    umul(lhs, abs(rhs), logger);
+    mul(lhs, abs(rhs), logger);
     lhs *= sgn;
     logger->info("Operation {} is done", "mul");
 }
 
 
 template<int BITS>
-void Command<BITS>::umul(int &lhs, int rhs, BasicLogPtr logger) {
+void Command<BITS>::mul(int &lhs, int rhs, BasicLogPtr logger) {
     logger->info("Start do operation {}", "imul");
     if (lhs < 0 || rhs < 0) {
         logger->error(std::to_string(lhs) + " or " + std::to_string(rhs) + " is negative number");
@@ -122,7 +122,7 @@ void Command<BITS>::command(TypeOperation name, int &lhs, int rhs, BasicLogPtr l
             Command::sub(lhs, rhs, logger);
             break;
         case TypeOperation::mul:
-            Command::mul(lhs, rhs, logger);
+            Command::imul(lhs, rhs, logger);
             break;
         default:
             logger->error("{} dont find", static_cast<int>(name));

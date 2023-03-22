@@ -1,3 +1,4 @@
+.386
 public @Remainder@8
 .model flat
 .code

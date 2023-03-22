@@ -7,7 +7,7 @@ file(GLOB SRC_FILES *.cpp)
 
 enable_language(ASM_MASM)
 
-set(ASM_SOURCES remainder.s)
+set(ASM_SOURCES remainder.asm)
 
 set(SOURCES main.cpp ${ASM_SOURCES})
 

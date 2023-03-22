@@ -38,5 +38,7 @@ add_subdirectory(kr1)
 add_subdirectory(free_room)
 add_subdirectory(string)
 
+add_subdirectory(Laba2_QT)
+
 
 add_test(NAME BSU COMMAND BSU)
