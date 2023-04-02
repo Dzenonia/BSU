@@ -1,9 +1,13 @@
 #include <iostream>
 
-extern "C" int __fastcall Remainder(int,int);
+extern "C" int __fastcall checkPalindrom(int,const char*);
 
+/// 10101000
+// 101010111
+//     11000
 int main()
 {
-    std::cout <<"remainder="<<Remainder(17, 9) << std::endl;
+    const char* ans = "aba";
+    std::cout << checkPalindrom(3, ans) << std::endl;
     return 0;
 }

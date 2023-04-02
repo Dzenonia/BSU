@@ -5,6 +5,68 @@
 #include "task3_crossing.h"
 #include "task3_sub.h"
 
+void task1(int *start, int32_t siz) {
+    std::cout << 1 << std::endl;
+    int x;
+    __asm{
+            mov ebx, start
+            mov ecx, 0
+
+            beg:
+            cmp ecx, siz
+            jge fin
+            mov esi, ecx
+            mov eax, [ebx + esi*4]
+            dec esi
+
+            comparison:
+            cmp esi, 0
+            jl comparisonIsOver
+            cmp eax, [ebx + esi*4]
+            je remove1
+            dec esi
+            jmp comparison
+            comparisonIsOver:
+            inc ecx
+            jmp beg
+
+            remove1:
+            dec siz
+            inc ecx
+            cmp ecx, siz
+            jge fin
+            dec ecx
+            mov esi, ecx
+            inc esi
+
+            loop1:
+            cmp esi, siz
+            jge beg
+            mov eax, [ebx + esi*4]
+            dec esi
+            mov [ebx + esi*4], eax
+            add esi, 2
+            jmp loop1
+
+
+            fin:
+            mov esi, siz
+
+            loop2:
+            dec esi
+            mov eax, [ebx + esi*4]
+            inc esi
+            mov [ebx + esi*4], eax
+            dec esi
+            cmp esi, 0
+            jg loop2
+            inc siz
+            mov eax, siz
+            inc eax
+            mov [ebx], eax
+    }
+}
+
 TEST(Laba4, Task1) {
     int array1[] = {1, 1, 1, 1, 5};
     int sz1 = getTask1(array1, 5);
@@ -76,4 +138,14 @@ TEST(Laba4, Task3Sub) {
     int arr6[] = {1, 2, 3};
     int res3[] = {2};
     EXPECT_FALSE(getTask3Sub(arr5, arr6, res3, 3, 3, 1));
+}
+
+TEST(a23, s) {
+    int arr1[] = {2, 2, 2, 7, 7, 4};
+    std::cout << 1 << std::endl;
+    task1(arr1, 6);
+    EXPECT_EQ(arr1[0], 4);
+    EXPECT_EQ(arr1[1], 2);
+    EXPECT_EQ(arr1[2], 7);
+    EXPECT_EQ(arr1[3], 4);
 }

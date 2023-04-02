@@ -5,6 +5,10 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QDebug>
+#include <QString>
+#include <QtCore>
+#include <QDebug>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -14,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->valueInput, &QLineEdit::editingFinished, this, &MainWindow::checkInputValue);
     connect(ui->baseInput, &QLineEdit::editingFinished, this, &MainWindow::checkInputBase);
     connect(ui->baseOutput, &QLineEdit::editingFinished, this, &MainWindow::checkOutputBase);
+    connect(ui->addStrToList, &QPushButton::clicked, this, &MainWindow::addString);
+    connect(ui->QString, &QRadioButton::clicked, this, &MainWindow::renderQString);
 }
 
 MainWindow::~MainWindow() {
@@ -98,5 +104,53 @@ void MainWindow::getAns() {
     ui->result->setStyleSheet("QLabel {color: green}");
     ui->result->setText(QString::number(value, ouBase));
 }
+
+void MainWindow::addString() {
+    QString current = ui->textAddStr->text();
+    if (current.isEmpty()) {
+        return;
+    }
+    ui->textEdit->append(current);
+}
+
+void MainWindow::printQString() {
+    ui->textBrowser->setText(ui->textEdit->toPlainText());
+}
+
+void MainWindow::renderQString() {
+    QString text = ui->textEdit->toPlainText();
+
+    QStringList list = text.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+    if (list.size() <= 2) {
+        return;
+    }
+    QString longer = list[0];
+    QString shorter = list[0];
+    for (const auto &word: list) {
+        if (word.size() > longer.size()) {
+            longer = word;
+        }
+        if (word.size() <= shorter.size()) {
+            shorter = word;
+        }
+    }
+    std::cout << shorter.toStdString() << " " << longer.toStdString() << std::endl;
+    std::cout << text.toStdString() << std::endl;
+    int posLonger = text.indexOf(longer);
+    int posShorter = text.lastIndexOf(shorter);
+    std::cout << posLonger << " " << posShorter << std::endl;
+    if (posLonger > posShorter) {
+        text.replace(posLonger, longer.length(), shorter);
+        text.replace(posShorter, shorter.length(), longer);
+    } else {
+        text.replace(posShorter, shorter.length(), longer);
+        text.replace(posLonger, longer.length(), shorter);
+    }
+
+
+
+    ui->textBrowser->setText(text);
+}
+
 
 

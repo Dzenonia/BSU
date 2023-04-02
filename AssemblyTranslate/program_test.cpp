@@ -1,4 +1,4 @@
- #include "program.h"
+#include "program.h"
 #include "gtest/gtest.h"
 #include "log.h"
 
@@ -26,4 +26,10 @@ TEST(Program, Test2) {
     auto logProcess = logFile.get("process");
     program.process(logProcess);
     EXPECT_EQ(program.outputData(), 9);
+}
+
+TEST(Program, Test3) {
+    Program<32> program("input1.txt");
+    program.process();
+    EXPECT_EQ(program.outputData(), 0);
 }

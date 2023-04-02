@@ -1,13 +1,26 @@
 .386
-public @Remainder@8
+public @checkPalindrom@8
 .model flat
 .code
-@Remainder@8 proc
-    mov eax,ecx ;первый параметр
-    mov ecx,edx ;второй параметр
-    cdq
-    idiv ecx
-    mov eax,edx
+@checkPalindrom@8 proc
+    mov esi, edx
+    dec ecx
+    mov ebx, esi
+    add ebx, ecx
+    begin:
+        mov eax, [esi]
+        cmp eax, [ebx]
+        je good
+            mov eax, 0
+            ret
+        good:
+        inc esi
+        dec ebx
+        dec ecx
+        cmp ecx, 0
+        jge begin
+    mov eax, 1
     ret
-@Remainder@8 endp
+@checkPalindrom@8 endp
+
 end

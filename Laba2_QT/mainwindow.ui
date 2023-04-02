@@ -6,26 +6,68 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>837</width>
+    <width>864</width>
     <height>600</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>XO Windy</family>
+    <bold>true</bold>
+   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="font">
+    <font>
+     <family>Rockwell Condensed</family>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 2px solid black;</string>
+   </property>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>817</width>
-      <height>391</height>
+      <x>0</x>
+      <y>0</y>
+      <width>871</width>
+      <height>601</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="9" column="0" colspan="3">
+      <widget class="QTextEdit" name="textEdit">
+       <property name="font">
+        <font>
+         <family>Sitka Small</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 2px solid purple;</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="baseInput"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="baseOutput"/>
+     </item>
+     <item row="5" column="0" colspan="3">
+      <widget class="QLineEdit" name="textAddStr">
+       <property name="font">
+        <font>
+         <family>Sitka Small</family>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLineEdit" name="valueInput"/>
      </item>
      <item row="0" column="2">
       <widget class="QLabel" name="labelOutputBase">
@@ -43,19 +85,53 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="0" colspan="3">
-      <widget class="QLabel" name="result">
+     <item row="10" column="1">
+      <widget class="QRadioButton" name="String">
+       <property name="text">
+        <string>String</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="labelInputBase">
        <property name="font">
         <font>
-         <family>Rockwell Condensed</family>
-         <pointsize>15</pointsize>
+         <family>Franklin Gothic Medium Cond</family>
+         <pointsize>17</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Результат</string>
+        <string>Начальная СС</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="2">
+      <widget class="QRadioButton" name="StringView">
+       <property name="text">
+        <string>StringView</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QRadioButton" name="QString">
+       <property name="text">
+        <string>QString</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QPushButton" name="addStrToList">
+       <property name="font">
+        <font>
+         <family>Franklin Gothic Book</family>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Добавить</string>
        </property>
       </widget>
      </item>
@@ -75,7 +151,26 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="3" column="0" rowspan="2" colspan="3">
+      <widget class="QLabel" name="result">
+       <property name="font">
+        <font>
+         <family>Rockwell Condensed</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 2px solid black;</string>
+       </property>
+       <property name="text">
+        <string>Результат</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1">
       <widget class="QPushButton" name="exit">
        <property name="font">
         <font>
@@ -91,7 +186,7 @@
       <widget class="QPushButton" name="getAns">
        <property name="font">
         <font>
-         <family>Franklin Gothic Demi</family>
+         <family>Agency FB</family>
         </font>
        </property>
        <property name="text">
@@ -99,45 +194,18 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="baseOutput"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="labelInputBase">
+     <item row="11" column="0" colspan="3">
+      <widget class="QTextBrowser" name="textBrowser">
        <property name="font">
         <font>
-         <family>Franklin Gothic Medium Cond</family>
-         <pointsize>17</pointsize>
+         <family>Sitka Small</family>
         </font>
-       </property>
-       <property name="text">
-        <string>Начальная СС</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLineEdit" name="valueInput"/>
-     </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>300</y>
-      <width>116</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actiondsad">
    <property name="text">
     <string>dsad</string>

@@ -18,13 +18,6 @@ public:
     static void mul(int &lhs, int rhs, BasicLogPtr logger = standartLog);
 
     static void imul(int &lhs, int rhs, BasicLogPtr logger = standartLog);
-
-//
-//    static void imul(int &lhs, int rhs);
-//
-//    static void div(int &lhs, int rhs);
-//
-//    static void idiv(const int &lhs, int rhs);
 };
 
 template<int BITS>

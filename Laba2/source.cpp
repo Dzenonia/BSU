@@ -77,10 +77,10 @@ int getTask3(int value) {
             xor edx, edx
             mov eax, 1
             beg:
-            imul value
-            jo end
-            inc res
-            jmp beg
+                imul value
+                jo end
+                inc res
+                jmp beg
             end:
     }
     return res;
@@ -100,17 +100,31 @@ std::tuple<uint16_t, uint16_t, int16_t> getTask4(const std::tuple<uint16_t, uint
     uint16_t c1 = 0;
     uint16_t c2 = 0;
     int16_t c3 = 0;
+
+    uint16_t of = 0;
     __asm {
             mov ax, a1
             add ax, b1
+            jnc skip1
+                mov of, 1
+            skip1:
             mov c1, ax
 
-            mov ax, a2
-            adc ax, b2
+            mov ax, of
+            mov of, 0
+            add ax, a2
+            jnc skip2
+                mov of, 1
+            skip2:
+            add ax, b2
+            jnc skip3
+                mov of, 1
+            skip3:
             mov c2, ax
 
             mov ax, a3
-            adc ax, b3
+            add ax, b3
+            add ax, of
             mov c3, ax
     }
     std::cout << std::dec << funcTo48Bits(lhs) << " + " << funcTo48Bits(rhs) << " = " << funcTo48Bits({c1, c2, c3})

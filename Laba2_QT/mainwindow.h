@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <string_render.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,6 +27,12 @@ private slots:
     void checkInputValue();
 
     void checkOutputBase();
+
+    void addString();
+
+    void printQString();
+
+    void renderQString();
 
 private:
     Ui::MainWindow *ui;
