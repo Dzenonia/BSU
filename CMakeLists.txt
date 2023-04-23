@@ -37,6 +37,12 @@ add_subdirectory(Laba7)
 add_subdirectory(kr1)
 add_subdirectory(free_room)
 add_subdirectory(string)
+add_subdirectory(Laba3_QT)
+add_subdirectory(geogebra)
+add_subdirectory(painter-demo)
+add_subdirectory(geobebra_example)
+add_subdirectory(rays)
+add_subdirectory(tester_QT)
 
 add_subdirectory(Laba2_QT)
 

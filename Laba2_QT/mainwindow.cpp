@@ -1,37 +1,35 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QPushButton>
-#include <algorithm>
+#include <QDebug>
 #include <QLabel>
 #include <QLineEdit>
-#include <QDebug>
+#include <QPushButton>
 #include <QString>
 #include <QtCore>
-#include <QDebug>
+#include <algorithm>
 #include <iostream>
 
-MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), ui(new Ui::MainWindow) {
+Main::Main(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    connect(ui->getAns, &QPushButton::clicked, this, &MainWindow::getAns);
-    connect(ui->exit, &QPushButton::clicked, this, &MainWindow::exit);
-    connect(ui->valueInput, &QLineEdit::editingFinished, this, &MainWindow::checkInputValue);
-    connect(ui->baseInput, &QLineEdit::editingFinished, this, &MainWindow::checkInputBase);
-    connect(ui->baseOutput, &QLineEdit::editingFinished, this, &MainWindow::checkOutputBase);
-    connect(ui->addStrToList, &QPushButton::clicked, this, &MainWindow::addString);
-    connect(ui->QString, &QRadioButton::clicked, this, &MainWindow::renderQString);
+    connect(ui->getAns, &QPushButton::clicked, this, &Main::getAns);
+    connect(ui->exit, &QPushButton::clicked, this, &Main::exit);
+    connect(ui->valueInput, &QLineEdit::editingFinished, this, &Main::checkInputValue);
+    connect(ui->baseInput, &QLineEdit::editingFinished, this, &Main::checkInputBase);
+    connect(ui->baseOutput, &QLineEdit::editingFinished, this, &Main::checkOutputBase);
+    connect(ui->addStrToList, &QPushButton::clicked, this, &Main::addString);
+    connect(ui->QString, &QRadioButton::clicked, this, &Main::renderQString);
 }
 
-MainWindow::~MainWindow() {
+Main::~Main() {
     delete ui;
 }
 
-void MainWindow::exit() {
+void Main::exit() {
     QCoreApplication::quit();
 }
 
-void MainWindow::checkInputValue() {
-    const auto &label = ui->valueInput->text();
+void Main::checkInputValue() {
+    const auto& label = ui->valueInput->text();
     if (label.size() == 0) {
         ui->labelValue->setStyleSheet("QLabel {color: black}");
         ui->labelValue->setText("Введите значение");
@@ -48,8 +46,8 @@ void MainWindow::checkInputValue() {
     ui->labelValue->setText("Ошибок нет!");
 }
 
-void MainWindow::checkInputBase() {
-    const auto &label = ui->baseInput->text();
+void Main::checkInputBase() {
+    const auto& label = ui->baseInput->text();
     if (label.size() == 0) {
         ui->labelInputBase->setStyleSheet("QLabel {color: black}");
         ui->labelInputBase->setText("Начальная СС");
@@ -66,8 +64,8 @@ void MainWindow::checkInputBase() {
     ui->labelInputBase->setText("Ошибок нет!");
 }
 
-void MainWindow::checkOutputBase() {
-    const auto &label = ui->baseOutput->text();
+void Main::checkOutputBase() {
+    const auto& label = ui->baseOutput->text();
     if (label.size() == 0) {
         ui->labelOutputBase->setStyleSheet("QLabel {color: black}");
         ui->labelOutputBase->setText("Итоговая СС");
@@ -84,10 +82,9 @@ void MainWindow::checkOutputBase() {
     ui->labelOutputBase->setText("Ошибок нет!");
 }
 
-
-void MainWindow::getAns() {
-    if (ui->labelInputBase->text() != "Ошибок нет!" || ui->labelOutputBase->text() != "Ошибок нет!" ||
-        ui->labelValue->text() != "Ошибок нет!") {
+void Main::getAns() {
+    if (ui->labelInputBase->text() != "Ошибок нет!" || ui->labelOutputBase->text() != "Ошибок нет!"
+        || ui->labelValue->text() != "Ошибок нет!") {
         ui->result->setStyleSheet("QLabel {color: red}");
         ui->result->setText("Ошибка получения ответа! Есть ошибки!");
         return;
@@ -105,7 +102,7 @@ void MainWindow::getAns() {
     ui->result->setText(QString::number(value, ouBase));
 }
 
-void MainWindow::addString() {
+void Main::addString() {
     QString current = ui->textAddStr->text();
     if (current.isEmpty()) {
         return;
@@ -113,11 +110,20 @@ void MainWindow::addString() {
     ui->textEdit->append(current);
 }
 
-void MainWindow::printQString() {
+void Main::printQString() {
     ui->textBrowser->setText(ui->textEdit->toPlainText());
 }
 
-void MainWindow::renderQString() {
+//
+// й влдыфлвжфы
+//    влдыфлвжфы
+//        выфвфы
+//
+//            вфы
+//
+//                выф
+//                    й	йццуй
+void Main::renderQString() {
     QString text = ui->textEdit->toPlainText();
 
     QStringList list = text.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
@@ -126,7 +132,7 @@ void MainWindow::renderQString() {
     }
     QString longer = list[0];
     QString shorter = list[0];
-    for (const auto &word: list) {
+    for (const auto& word : list) {
         if (word.size() > longer.size()) {
             longer = word;
         }
@@ -136,8 +142,10 @@ void MainWindow::renderQString() {
     }
     std::cout << shorter.toStdString() << " " << longer.toStdString() << std::endl;
     std::cout << text.toStdString() << std::endl;
-    int posLonger = text.indexOf(longer);
-    int posShorter = text.lastIndexOf(shorter);
+    int posLonger = QRegExp("\\b" + longer + "\\b").indexIn(text);
+    //    int posLonger = text.indexOf(longer);
+    //    int posShorter = text.lastIndexOf(shorter);
+    int posShorter = QRegExp("\\b" + shorter + "\\b").lastIndexIn(text);
     std::cout << posLonger << " " << posShorter << std::endl;
     if (posLonger > posShorter) {
         text.replace(posLonger, longer.length(), shorter);
@@ -148,9 +156,5 @@ void MainWindow::renderQString() {
     }
 
 
-
     ui->textBrowser->setText(text);
 }
-
-
-

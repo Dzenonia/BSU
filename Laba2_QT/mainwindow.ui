@@ -13,6 +13,7 @@
   <property name="font">
    <font>
     <family>XO Windy</family>
+    <weight>75</weight>
     <bold>true</bold>
    </font>
   </property>
@@ -23,6 +24,7 @@
    <property name="font">
     <font>
      <family>Rockwell Condensed</family>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -127,6 +129,7 @@
        <property name="font">
         <font>
          <family>Franklin Gothic Book</family>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -186,7 +189,9 @@
       <widget class="QPushButton" name="getAns">
        <property name="font">
         <font>
-         <family>Agency FB</family>
+         <family>FreeMono</family>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
